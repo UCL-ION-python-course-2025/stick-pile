@@ -58,7 +58,7 @@ class StickPile:
         self.verbose = verbose
         self.render = render
 
-    def reset(self) -> Tuple[Any, float, bool, Dict]:
+    def reset(self, take_first_step: bool = True) -> Tuple[Any, float, bool, Dict]:
         """Resets the environment (resetting state, total return & whether the episode has
         terminated) so it can be re-used for another episode.
 
@@ -78,7 +78,7 @@ class StickPile:
         self.player_move: Literal["player", "opponent"] = random.choice(["player", "opponent"])
         self.done: bool = False
 
-        if self.player_move == "opponent":
+        if self.player_move == "opponent" and take_first_step:
             opponent_action = self.opponent_choose_move(
                 number_of_sticks_remaining=self.number_of_sticks_remaining
             )
