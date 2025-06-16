@@ -15,7 +15,9 @@ def choose_move(number_of_sticks_remaining):
     Returns:
         number_of_sticks_to_remove (integer): The number of sticks you want to remove from the pile.
     """
-    raise NotImplementedError("You need to implement this function!")
+    raise NotImplementedError(
+        "You need to implement this function!"
+    )  # <-- Delete this line to get started
 
 
 if __name__ == "__main__":  # <----------- please don't change this line

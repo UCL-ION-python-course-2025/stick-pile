@@ -11,6 +11,13 @@
 * Play continues until the final stick has been taken. The player who takes the final stick is the winner.
 * For example, there are 5 sticks left on the pile. Player 1 takes 3 sticks, meaning there are 2 sticks left. Player 2 can now take the final two sticks and wins the game.
 
+## Polite request 🙏
+* ChatGPT or other large language models will immediately come up with a perfect solution to this game. Please refrain from using them!
+* There is also information available online about optimal strategies to similar games to this. Please try to think of you strategy yourself.
+* Please also close the AI assistant window in replit and disable AI autocomplete (bottom left of your screen).
+
+![AI](ai-turn-off.png)
+
 ## Your task 🔧
 
 * Your task is to write code in Python to play this game.
@@ -43,9 +50,6 @@
 * First try to make your solution that makes valid moves only and always grabs the last stick if possible.
 * After you've got this, try to think of clever moves to make earlier in the game to beat your opponent.
 
-## Polite request 🙏
-* ChatGPT or other large language models will immediately come up with a perfect solution to this game. Please refrain from using them!
-* There is also information available online about optimal strategies to similar games to this. Please try to think of you strategy yourself.
 
 ### play_game
 * At the bottom of the code you'll see a call to the function `play_game`
