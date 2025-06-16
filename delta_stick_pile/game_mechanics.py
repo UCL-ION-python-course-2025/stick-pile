@@ -23,15 +23,13 @@ def play_game(
     your_choose_move: Callable,
     opponent_choose_move: Callable,
     game_speed_multiplier=1,
-    render=True,
-    verbose=False,
 ):
 
     game = StickPile(
         opponent_choose_move=opponent_choose_move,
         game_speed_multiplier=game_speed_multiplier,
-        verbose=verbose,
-        render=render,
+        verbose=True,
+        render=False,
     )
 
     state, reward, done, info = game.reset()
@@ -48,7 +46,7 @@ class StickPile:
         game_speed_multiplier=1,
         verbose=False,
         render=True,
-    ):
+    ) -> None:
         """Initialises the object.
 
         Is called when you call `environment = Env()`.
@@ -56,7 +54,7 @@ class StickPile:
         It sets everything up in the starting state for the episode to run.
         """
         self.opponent_choose_move = opponent_choose_move
-        self.game_speed_multiplierm = game_speed_multiplier
+        self.game_speed_multiplier = game_speed_multiplier
         self.verbose = verbose
         self.render = render
 
@@ -77,13 +75,13 @@ class StickPile:
         self.number_of_sticks_remaining = random.randint(15, 25)
         if self.verbose:
             print(f"Game starting with {self.number_of_sticks_remaining} sticks")
-        self.player_move: Literal["player", "opponent"] = random.choice(
-            ["player", "opponent"]
-        )
+        self.player_move: Literal["player", "opponent"] = random.choice(["player", "opponent"])
         self.done: bool = False
 
         if self.player_move == "opponent":
-            opponent_action = self.opponent_choose_move(self.number_of_sticks_remaining)
+            opponent_action = self.opponent_choose_move(
+                number_of_sticks_remaining=self.number_of_sticks_remaining
+            )
             self._step(opponent_action)
 
         return self.number_of_sticks_remaining, 0, self.done, {}
@@ -128,7 +126,7 @@ class StickPile:
             print(msg)
             print("\nGame Terminated")
             self.done = True
-            return 0
+            return -1
 
         self.number_of_sticks_remaining -= num_sticks_remove
         if self.verbose:
@@ -138,6 +136,7 @@ class StickPile:
             print(
                 f"There {"are" if self.number_of_sticks_remaining != 1 else "is"} {self.number_of_sticks_remaining} stick{'s' if self.number_of_sticks_remaining != 1 else ''} left"
             )
+
         if self.number_of_sticks_remaining == 0:
             self.done = True
             return 1
@@ -147,12 +146,10 @@ class StickPile:
         return 0
 
     def switch_player(self):
-        self.player_move = "oppponent" if self.player_move == "player" else "player"
+        self.player_move = "opponent" if self.player_move == "player" else "player"
 
     def move_is_valid(self, num_sticks_remove: int) -> Tuple[str, bool]:
-        player_indicator_string = (
-            "Your" if self.player_move == Player.player else "Your opponent's"
-        )
+        player_indicator_string = "Your" if self.player_move == "player" else "Your opponent's"
         if num_sticks_remove is None:
             return (
                 f"Whoops {player_indicator_string} function did not return anything! Your function must return 1, 2, or 3.",
@@ -164,9 +161,7 @@ class StickPile:
                 False,
             )
 
-        player_indicator_string = (
-            "You" if self.player_move == Player.player else "Your opponent"
-        )
+        player_indicator_string = "You" if self.player_move == "player" else "Your opponent"
         if num_sticks_remove not in [1, 2, 3]:
 
             return (
@@ -183,6 +178,4 @@ class StickPile:
 
 
 def switch_player(self) -> None:
-    self.player_move = (
-        Player.player if self.player_move == Player.opponent else Player.opponent
-    )
+    self.player_move = Player.player if self.player_move == Player.opponent else Player.opponent

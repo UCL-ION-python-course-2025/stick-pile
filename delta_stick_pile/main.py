@@ -1,9 +1,9 @@
-from typing import Any, Dict
-
 from check_submission import check_submission
-from game_mechanics import StickPile, choose_move_randomly, load_pkl, play_game, save_pkl
+from game_mechanics import choose_move_randomly, play_game
 
 TEAM_NAME = "Team Name"  # <---- Enter your team name here!
+
+# This just checks that you've entered a team name. Don't change this.
 assert TEAM_NAME != "Team Name", "Please change your TEAM_NAME!"
 
 
@@ -31,6 +31,4 @@ if __name__ == "__main__":
         your_choose_move=choose_move,
         opponent_choose_move=choose_move_randomly,
         game_speed_multiplier=1,
-        render=True,
-        verbose=False,
     )
