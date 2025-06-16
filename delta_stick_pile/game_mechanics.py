@@ -1,5 +1,6 @@
 import random
 from typing import Any, Callable, Dict, Literal, Tuple
+import time
 
 
 def choose_move_randomly(number_of_sticks_remaining) -> int:
@@ -119,6 +120,7 @@ class StickPile:
 
     def _step(self, num_sticks_remove: int) -> int:
         if self.verbose:
+            time.sleep(0.5 / self.game_speed_multiplier)
             print("\n")
 
         msg, is_valid = self.move_is_valid(num_sticks_remove)
@@ -145,7 +147,7 @@ class StickPile:
 
         return 0
 
-    def switch_player(self):
+    def switch_player(self) -> None:
         self.player_move = "opponent" if self.player_move == "player" else "player"
 
     def move_is_valid(self, num_sticks_remove: int) -> Tuple[str, bool]:
@@ -175,7 +177,3 @@ class StickPile:
                 False,
             )
         return "", True
-
-
-def switch_player(self) -> None:
-    self.player_move = Player.player if self.player_move == Player.opponent else Player.opponent

@@ -1,4 +1,3 @@
-from check_submission import check_submission
 from game_mechanics import choose_move_randomly, play_game
 
 TEAM_NAME = "Team Name"  # <---- Enter your team name here!
@@ -19,16 +18,12 @@ def choose_move(number_of_sticks_remaining):
     raise NotImplementedError("You need to implement this function!")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # <----------- please don't change this line
 
-    ## Example workflow, feel free to edit this! ###
-
-    check_submission(
-        TEAM_NAME
-    )  # <---- Make sure I pass! Or your solution will not work in the tournament!!
-
+    # This runs the game with your solution playing against a randomly
+    # moving opponent. Do not touch this until you've got a good solution.
     play_game(
         your_choose_move=choose_move,
         opponent_choose_move=choose_move_randomly,
-        game_speed_multiplier=1,
+        game_speed_multiplier=1,  # <--- Change this if you want the game to run faster or slower
     )
